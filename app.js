@@ -1,6 +1,9 @@
-const _ = require('lodash');
-const items = [1,2,[3,[4]]]
-const newItems = _.flattenDeep(items)
-setInterval(() => {
-    console.log('hello')
-}, 1000);
+const {createReadStream, createWriteStream} = require('fs');
+
+const stream = createReadStream('./content/big-file.txt',{highWaterMark:9000,encoding:'utf8'});
+stream.on('data', (result)=>{
+    console.log(result)
+})
+stream.on('error', (err)=>{
+    console.log(err)
+})
